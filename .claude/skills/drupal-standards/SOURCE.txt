@@ -1,0 +1,3 @@
+Source: https://github.com/nonzod/drupaldev-claude-skill
+Commit: 45d900fc8c07689a6d0c065848c5a625678c3b36
+Installed: 2026-10-19 (SKILL.md + coding_standards/; upstream install.sh omits coding_standards/)

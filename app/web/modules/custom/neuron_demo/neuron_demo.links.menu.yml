@@ -1,0 +1,19 @@
+neuron_demo.concierge:
+  title: Concierge
+  description: 'Summarize, review, edit and draft articles with an AI assistant.'
+  route_name: neuron_demo.concierge
+  parent: system.admin
+  weight: -20
+  options:
+    icon:
+      icon_id: pencil
+
+neuron_demo.intelligence:
+  title: Intelligence
+  description: 'Explore how the site is used with an AI analyst.'
+  route_name: neuron_demo.intelligence
+  parent: system.admin
+  weight: -19
+  options:
+    icon:
+      icon_id: database

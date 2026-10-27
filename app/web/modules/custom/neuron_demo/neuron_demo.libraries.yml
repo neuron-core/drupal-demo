@@ -1,0 +1,8 @@
+chat:
+  js:
+    ui/dist/chat.js: { preprocess: false, minified: true, attributes: { type: module } }
+  css:
+    component:
+      ui/dist/assets/chat.css: { preprocess: false, minified: true }
+  dependencies:
+    - core/drupalSettings

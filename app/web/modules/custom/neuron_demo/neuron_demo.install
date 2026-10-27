@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for the Neuron Demo module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Agents with tools use the "chat_with_tools" operation: send it to Claude.
+ */
+function neuron_demo_install(): void {
+  \Drupal::configFactory()->getEditable('ai_provider_anthropic.settings')
+    ->set('api_key', 'anthropic')
+    ->set('prompt_cache_enabled', TRUE)
+    ->save();
+  \Drupal::configFactory()->getEditable('ai.settings')
+    ->set('default_providers.chat_with_tools', [
+      'provider_id' => 'anthropic',
+      'model_id' => 'claude-opus-5-5',
+    ])
+    ->save();
+}

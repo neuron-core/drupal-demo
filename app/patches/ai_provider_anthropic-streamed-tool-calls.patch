@@ -1,0 +1,49 @@
+--- a/src/OperationType/Chat/AnthropicStreamedChatMessageIterator.php	2026-10-19 11:22:25.805529978 +0200
++++ b/src/OperationType/Chat/AnthropicStreamedChatMessageIterator.php	2026-10-19 11:22:34.095759953 +0200
+@@ -5,6 +5,7 @@
+ use Anthropic\Messages\InputJSONDelta;
+ use Anthropic\Messages\RawContentBlockDeltaEvent;
+ use Anthropic\Messages\RawContentBlockStartEvent;
++use Anthropic\Messages\RawContentBlockStopEvent;
+ use Anthropic\Messages\RawMessageDeltaEvent;
+ use Anthropic\Messages\TextDelta;
+ use Anthropic\Messages\ThinkingDelta;
+@@ -140,9 +141,35 @@
+       return;
+     }
+ 
+-    // RawMessageStartEvent / RawContentBlockStopEvent / RawMessageStopEvent
+-    // don't yield user-visible chunks; metadata on start/stop could be
+-    // wired in a later iteration.
++    // A tool_use block is complete at its stop event: emit it in the
++    // OpenAI-style shape StreamedChatMessageIterator::assembleToolCalls()
++    // reads, so reconstructChatOutput() returns the tool calls.
++    if ($event instanceof RawContentBlockStopEvent && isset($this->pendingTools[$event->index])) {
++      $tool = $this->pendingTools[$event->index];
++      unset($this->pendingTools[$event->index]);
++      yield $this->createStreamedChatMessage('assistant', '', [], [
++        new class($tool) {
++
++          public function __construct(private array $tool) {}
++
++          public function toArray(): array {
++            return [
++              'id' => $this->tool['id'],
++              'type' => 'function',
++              'function' => [
++                'name' => $this->tool['name'],
++                'arguments' => $this->tool['input'] === '' ? '{}' : $this->tool['input'],
++              ],
++            ];
++          }
++
++        },
++      ]);
++      return;
++    }
++
++    // RawMessageStartEvent / RawMessageStopEvent don't yield user-visible
++    // chunks; metadata on start/stop could be wired in a later iteration.
+   }
+ 
+ }

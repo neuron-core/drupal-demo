@@ -1,0 +1,44 @@
+neuron_demo.concierge:
+  path: '/admin/concierge'
+  defaults:
+    _controller: '\Drupal\neuron_demo\Controller\ChatController::page'
+    _title: 'Concierge'
+    agent: concierge
+  requirements:
+    _permission: 'access administration pages'
+
+neuron_demo.intelligence:
+  path: '/admin/intelligence'
+  defaults:
+    _controller: '\Drupal\neuron_demo\Controller\ChatController::page'
+    _title: 'Intelligence'
+    agent: intelligence
+  requirements:
+    _permission: 'access administration pages'
+
+neuron_demo.threads:
+  path: '/admin/neuron-demo/{agent}/threads'
+  defaults:
+    _controller: '\Drupal\neuron_demo\Controller\ChatController::threads'
+  methods: [GET]
+  requirements:
+    _permission: 'access administration pages'
+    agent: 'concierge|intelligence'
+
+neuron_demo.thread:
+  path: '/admin/neuron-demo/{agent}/threads/{thread}'
+  defaults:
+    _controller: '\Drupal\neuron_demo\Controller\ChatController::thread'
+  methods: [GET]
+  requirements:
+    _permission: 'access administration pages'
+    agent: 'concierge|intelligence'
+
+neuron_demo.run:
+  path: '/admin/neuron-demo/{agent}/run'
+  defaults:
+    _controller: '\Drupal\neuron_demo\Controller\ChatController::run'
+  methods: [POST]
+  requirements:
+    _permission: 'access administration pages'
+    agent: 'concierge|intelligence'

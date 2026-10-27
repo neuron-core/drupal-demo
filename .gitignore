@@ -1,0 +1,11 @@
+/app/vendor/
+/app/web/core/
+/app/web/modules/contrib/
+/app/web/themes/contrib/
+/app/web/sites/*/files/
+/app/web/sites/*/settings.php
+/app/web/modules/custom/neuron_demo/ui/node_modules/
+/.codex
+/.code
+/.idea
+.env

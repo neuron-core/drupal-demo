@@ -1,0 +1,10 @@
+name: 'Neuron Demo'
+type: module
+description: 'Concierge and Intelligence: two Neuron AI agents in the Drupal admin.'
+package: 'Artificial Intelligence (AI)'
+core_version_requirement: ^11.4
+dependencies:
+  - ai_neuron:ai_neuron
+  - ai_provider_anthropic:ai_provider_anthropic
+  - sm:sm
+  - statistics:statistics

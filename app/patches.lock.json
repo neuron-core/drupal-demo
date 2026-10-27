@@ -1,0 +1,17 @@
+{
+    "_hash": "ea788d3be7432e3524f56b45091ae9380d48c09e3d128d7054d3d65078071db5",
+    "patches": {
+        "drupal/ai_provider_anthropic": [
+            {
+                "package": "drupal/ai_provider_anthropic",
+                "description": "Emit streamed tool_use blocks as tool calls",
+                "url": "patches/ai_provider_anthropic-streamed-tool-calls.patch",
+                "sha256": "f04036e37bff8262a908b0e58d9e1189981d536d8a90ec5235a48d8a1cb7afa1",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ]
+    }
+}

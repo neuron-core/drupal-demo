@@ -1,0 +1,9 @@
+services:
+  Symfony\Component\Mercure\HubInterface:
+    class: Symfony\Component\Mercure\Hub
+    factory: [Drupal\neuron_demo\MercureHubFactory, create]
+
+  neuron_demo.model_settings:
+    class: Drupal\neuron_demo\EventSubscriber\ModelSettings
+    tags:
+      - { name: event_subscriber }
